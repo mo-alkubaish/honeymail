@@ -8,8 +8,8 @@ services:
     container_name: honeymail
     ports:
       - "25:10025"   # SMTP port
-      - "10026:10026"   # SMTP TLS port
-      - "8080:8080"     # API port
+      # - "10026:10026"   # SMTP TLS port
+      # - "8080:8080"     # API port
     volumes:
       - ./mail.db:/app/mail.db
       - ./logs:/app/logs
