@@ -2,6 +2,9 @@ package main
 
 import (
 	//"flag"
+	"log"
+	"path/filepath"
+
 	"github.com/boltdb/bolt"
 	"github.com/sec51/goconf"
 	"github.com/sec51/honeymail/api"
@@ -13,7 +16,6 @@ import (
 	"github.com/sec51/honeymail/processor"
 	"github.com/sec51/honeymail/smtpd"
 	"github.com/sec51/honeymail/storage"
-	"log"
 )
 
 func main() {
@@ -30,10 +32,14 @@ func main() {
 	apiHost := goconf.AppConf.DefaultString("http.listen_to", "0.0.0.0")
 	apiPort := goconf.AppConf.DefaultString("http.port", "8080")
 
+	// Data directory for storing files
+	dataDir := "/app/data"
+
 	// ===========================
 
 	// DB STORAGE for emails
-	db, err := bolt.Open("mail.db", 0600, nil)
+	mailDbPath := filepath.Join(dataDir, "mail.db")
+	db, err := bolt.Open(mailDbPath, 0600, nil)
 	if err != nil {
 		log.Fatal(err)
 	}
