@@ -1,0 +1,33 @@
+# Git files
+.git
+.gitignore
+
+# Compiled binaries
+honeymail
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Dependency directories (if not using vendoring)
+# vendor/
+
+# Test binary, built with `go test -c`
+*.test
+
+# Output of the go coverage tool
+*.out
+
+# Log files
+*.log
+logs/
+
+# Database files (these will be mounted as volumes)
+*.db
+
+# Editor directories and files
+.idea/
+.vscode/
+*.swp
+*.swo

@@ -21,6 +21,7 @@ Here a list of features developed so far:
 - [x] Sha256 hash of email parts and fields like: FROM, TO, CC, attachments.
 - [x] API and allows to browse different days: `/api/emails/today` or `/api/emails/YYYY-MM-dd`
 - [x] Simple DDoS protection in case spammers try to establish many connections and never finish sending data.
+- [x] Docker support for easy deployment and isolation
 
 ### Future development
 
@@ -30,6 +31,7 @@ Here a list of features developed so far:
 - [ ] Extract additional configuration parameters which are now hard coded (Example: amount of times a client needs to fail to send emails before it gets locked down)
 
 ### How to run it:
+#### Standard Installation
 
 1) Generate a public/private key via:
 
@@ -58,6 +60,33 @@ To see a spefici email (you can find the id from the list return from /api/email
 
 - `/api/email?id=49689cfcb7fcbf83ed95df3a65ae6d9047678ca1`
 
+#### Docker Installation
+
+1) Generate SSL certificates as described above and place them in the appropriate location as specified in your config file.
+
+2) Configure the application in `conf/development.conf` or `conf/production.conf`.
+
+3) Build and start the container with Docker Compose:
+```bash
+docker-compose up -d
+```
+
+4) To stop the container:
+```bash
+docker-compose down
+```
+
+5) To view logs:
+```bash
+docker-compose logs -f
+```
+
+The Docker configuration includes:
+- Persistent storage for the mail database
+- Volume mounts for logs and configuration
+- Proper port mappings for SMTP (10025), SMTP TLS (10026), and API (8080)
+- Automatic restarts in case of failures
+
 Please report any bugs you will encounter.
 
 ### Dependencies
@@ -78,4 +107,4 @@ MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
 ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
 WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
 ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
-OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE. 
+OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
